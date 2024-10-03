@@ -4,19 +4,19 @@ lever::lever()
 {
     pin_ = 0;
     bPowered_ = false;
-    readDelay_ = 50;
+    readDelay_ = 0;
 }
 
 lever::lever(int pin)
 {
     pin_ = pin;
     bPowered_ = false;
-    readDelay_ = 50;
+    readDelay_ = 0;
 }
 
 void lever::setup()
 {
-    pinMode(pin_, INPUT);
+    pinMode(pin_, INPUT_PULLUP);
     bPowered_ = digitalRead(pin_);
 }
 
@@ -30,8 +30,6 @@ bool lever::detectChange()
     bool change = false;
     bool reading = digitalRead(pin_);
     change = (reading != bPowered_);
-    delay(readDelay_);
-
     bPowered_ = reading;
     return change;
 }

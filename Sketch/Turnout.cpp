@@ -18,7 +18,7 @@ turnout::turnout(int id, lever& l, int servo, int led)
 
 void turnout::saveToEEPROM()
 {
-    EEPROM.write(id_, bThrown_);
+    EEPROM.update(id_, bThrown_);
 }
 
 void turnout::readFromEEPROM()
@@ -74,6 +74,7 @@ void turnout::setup()
 {
     pinMode(LEDPin_, OUTPUT);
     servo_.attach(servoPin_);
+    plever_.setup();
     readFromEEPROM();
 }
 
@@ -87,9 +88,14 @@ void turnout::toggle()
 {
     bThrown_ = !bThrown_;
     update();
-    Serial.print("turnout ");
+    Serial.print("Turnout ");
     Serial.print(id_);
     Serial.println(" toggled");
+}
+
+void turnout::centre()
+{
+    servo_.write(45, 100);
 }
 
 void turnout::checkInputs()

@@ -22,8 +22,6 @@ class turnout
 
         void writePins();
 
-        void update();
-
         void checkLever();
         void checkSerial();
 
@@ -36,6 +34,10 @@ class turnout
 
         void set(bool state);
         void toggle();
+
+        void centre();
+
+        void update();
 
         void checkInputs();
 
